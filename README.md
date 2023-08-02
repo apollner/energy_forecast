@@ -33,3 +33,16 @@ To run the project, execute the `project_script.py` script. This will output the
 ![True and Predicted ND Values](images/true_and_predicted_nd_values.png)
 
 The plot above shows the true and predicted ND values on the test set.
+
+## Future Improvements
+While our current model uses time-based features derived from the SETTLEMENT_DATE, there are several other features that could be used to improve the model's performance in forecasting energy demand:
+
+1. Weather Data: Weather conditions, especially temperature and humidity, can significantly influence energy demand. For example, higher temperatures can increase demand due to the use of air conditioning systems, while lower temperatures can lead to increased heating use. Therefore, incorporating weather data into the model could potentially improve its predictive accuracy.
+
+2.Holiday Indicators: Energy usage patterns can vary on public holidays, weekends, and during specific festive seasons. A binary feature indicating whether a day is a holiday or not could help the model capture these variations.
+
+3.Historical Demand Data: The energy demand in the past hours or days can be indicative of future demand. Incorporating lagged features, i.e., demand values at previous time steps, might improve the model's ability to capture temporal dependencies in the data.
+
+4.Macro-economic indicators: Factors such as GDP growth rate, industrial production index, and employment rate can also influence energy demand. Incorporating these macro-economic indicators could provide the model with a broader context for prediction.
+
+Please note that the addition of these features would require access to the relevant data and might involve substantial preprocessing. Moreover, while these features could potentially improve the model's performance, the actual impact would need to be validated through experimentation.
