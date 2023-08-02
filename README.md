@@ -2,7 +2,7 @@
 
 This project involves training a machine learning model to forecast energy demand.
 
-The data used in this project consists of hourly energy demand data for the years 2020 to 2023, based on UK time. The data includes the following features:
+The data used in this project consists of hourly energy demand data for the years 2020 to 2023 from the UK, from ![here](https://data.nationalgrideso.com/demand/historic-demand-data). The data includes the following features:
 
 - `SETTLEMENT_DATE`: The date and time of the data point. All times are UK time and for the half hour beginning.
 - `SETTLEMENT_PERIOD`: A number representing the half-hour period of the day. For example, 1 represents the period from 00:00 to 00:30, 2 represents the period from 00:30 to 01:00, and so on.
