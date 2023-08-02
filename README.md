@@ -15,9 +15,9 @@ The model was trained to predict the `ND` value based on the time-based features
 
 The plot above shows the ND values over time.
 
-![ND by Month and Hour](images/nd_by_month_and_hour.png)
+![ND by Month and Hour](images/nd_by_month_corrected.png)
 
-The box plots above show the distribution of the ND values by month and hour.
+The box plots above show the distribution of the ND values by month.
 
 The project includes the following files:
 
