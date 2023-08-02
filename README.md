@@ -1,13 +1,12 @@
-
 # Energy Demand Forecasting Project
 
 This project involves training a machine learning model to forecast energy demand.
 
-The data used in this project consists of hourly energy demand data for the years 2020 to 2023. The data includes the following features:
+The data used in this project consists of hourly energy demand data for the years 2020 to 2023, based on UK time. The data includes the following features:
 
-- `SETTLEMENT_DATE`: The date and time of the data point.
-- `SETTLEMENT_PERIOD`: A number from 1 to 48 representing the half-hour period of the day. For example, 1 represents the period from 00:00 to 00:30, 2 represents the period from 00:30 to 01:00, and so on.
-- `ND`: The non-delivery amount of energy in MWh.
+- `SETTLEMENT_DATE`: The date and time of the data point. All times are UK time and for the half hour beginning.
+- `SETTLEMENT_PERIOD`: A number representing the half-hour period of the day. For example, 1 represents the period from 00:00 to 00:30, 2 represents the period from 00:30 to 01:00, and so on.
+- `ND`: The non-delivery amount of energy in MWh. All values are an average over the half hour.
 
 The model was trained to predict the `ND` value based on the time-based features derived from `SETTLEMENT_DATE`.
 
@@ -15,9 +14,9 @@ The model was trained to predict the `ND` value based on the time-based features
 
 The plot above shows the ND values over time.
 
-![ND by Month and Hour](images/nd_by_month_corrected.png)
+![ND by Month Corrected](images/nd_by_month_corrected.png)
 
-The box plots above show the distribution of the ND values by month.
+The box plot above shows the distribution of the ND values by month.
 
 The project includes the following files:
 
