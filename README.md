@@ -8,7 +8,21 @@ The data used in this project consists of hourly energy demand data for the year
 - `SETTLEMENT_PERIOD`: A number representing the half-hour period of the day. For example, 1 represents the period from 00:00 to 00:30, 2 represents the period from 00:30 to 01:00, and so on.
 - `ND`: National Demand. All values are an average over the half hour.
 
-The model was trained to predict the `ND` value based on the time-based features derived from `SETTLEMENT_DATE`.
+## Encoding Cyclic Features with Sine and Cosine
+
+Time-based features such as hours of the day or months of the year are inherently cyclic. For instance, after the 12th month (December), the cycle starts again with the 1st month (January). Similarly, after 23:00 hours, the next hour is 00:00. Treating these features as plain numeric values can be misleading for a machine learning model. A model might interpret the jump from 23 to 0 hours or from December to January as a significant change, while in the context of time, they're adjacent values.
+
+To preserve the cyclic nature of these features, we use trigonometric transformations, specifically sine and cosine functions. The idea is to project each hour or month value onto a circle such that the cyclic pattern is captured. For instance, for the `hour` feature:
+
+- `hour_sin` = \(\sin\left(\frac{2\pi \times \text{hour}}{24}\right)\)
+- `hour_cos` = \(\cos\left(\frac{2\pi \times \text{hour}}{24}\right)\)
+
+Similarly, for the `month` feature:
+
+- `month_sin` = \(\sin\left(\frac{2\pi \times \text{month}}{12}\right)\)
+- `month_cos` = \(\cos\left(\frac{2\pi \times \text{month}}{12}\right)\)
+
+Using this encoding, the difference between December (12) and January (1) or between 23:00 and 00:00 hours becomes minimal, which allows the model to recognize the cyclical patterns in the data better.
 
 ![ND Over Time](images/nd_over_time.png)
 
