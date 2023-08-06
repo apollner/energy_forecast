@@ -24,11 +24,11 @@ Similarly, for the `month` feature:
 
 Using this encoding, the difference between December (12) and January (1) or between 23:00 and 00:00 hours becomes minimal, which allows the model to recognize the cyclical patterns in the data better.
 
-![ND Over Time](images/nd_over_time.png)
+![nd_over_time](images/nd_over_time.png)
 
 The plot above shows the ND values over time.
 
-![ND by Month Corrected](images/nd_by_month_and_hour.png)
+![nd_by_month_and_hour](images/nd_by_month_and_hour.png)
 
 The box plot above shows the distribution of the ND values by month and hour.
 
