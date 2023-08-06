@@ -1,17 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Aug  6 11:12:42 2023
-
-@author: aronp
-"""
-
-
 import pandas as pd
 import numpy as np
-from math import sin, cos, pi
+from math import pi
 import xgboost as xgb
 from sklearn.metrics import mean_squared_error
-import joblib
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -20,7 +11,6 @@ import seaborn as sns
 def preprocess_data(df):
     df = df.copy()
     df['SETTLEMENT_DATE'] = pd.to_datetime(df['SETTLEMENT_DATE'])
-    # Add the half-hourly offset from SETTLEMENT_PERIOD to the SETTLEMENT_DATE
     df['SETTLEMENT_DATETIME'] = df['SETTLEMENT_DATE'] + \
         pd.to_timedelta((df['SETTLEMENT_PERIOD'] - 1) * 30, unit='m')
     df = df.set_index('SETTLEMENT_DATETIME')
@@ -71,6 +61,9 @@ df = pd.concat([df_2020, df_2021, df_2022, df_2023])
 
 # Create time-based features
 df = create_features(df)
+# Store original hour and month for visualization
+df['original_hour'] = df['hour']
+df['original_month'] = df['month']
 
 # Encode the 'month' and 'hour' features
 df = encode_cyclic_feature(df, 'month', 12)
@@ -121,6 +114,7 @@ results_df = pd.DataFrame({
     'True': y_test,
     'Predicted': y_pred
 })
+
 # Create directory for images
 os.makedirs(f"/images", exist_ok=True)
 
@@ -132,6 +126,27 @@ plt.ylabel('ND')
 plt.xlabel('Date')
 plt.savefig(f"/images/nd_over_time.png")
 
+
+# Box plot of the target variable by month and hour
+fig, axes = plt.subplots(2, 1, figsize=(15, 10), gridspec_kw={'hspace': 0.5})
+
+sns.boxplot(data=df, x='original_month', y=TARGET,
+            ax=axes[0], palette="viridis", width=0.6)
+axes[0].set_title('ND by Month', fontsize=16)
+axes[0].set_xlabel('Month', fontsize=14)
+axes[0].set_ylabel('ND', fontsize=14)
+axes[0].grid(True, linestyle='--', alpha=0.7)
+axes[0].tick_params(axis='both', which='major', labelsize=13)
+
+sns.boxplot(data=df, x='original_hour', y=TARGET,
+            ax=axes[1], palette="viridis", width=0.6)
+axes[1].set_title('ND by Hour', fontsize=16)
+axes[1].set_xlabel('Hour', fontsize=14)
+axes[1].set_ylabel('ND', fontsize=14)
+axes[1].grid(True, linestyle='--', alpha=0.7)
+axes[1].tick_params(axis='both', which='major', labelsize=13)
+
+
 # Plot of the true and predicted ND values
 plt.figure(figsize=(15, 5))
 results_df['True'].plot(label='True')
@@ -139,3 +154,22 @@ results_df['Predicted'].plot(label='Predicted')
 plt.legend()
 plt.title('True and Predicted ND Values')
 plt.savefig(f"/images/true_and_predicted_nd_values.png")
+
+# Extract feature importance
+feature_importance = reg.feature_importances_
+
+# Create a DataFrame for the feature importance
+feature_importance_df = pd.DataFrame({
+    'Feature': FEATURES,
+    'Importance': feature_importance
+})
+
+# Sort the DataFrame by importance
+feature_importance_df = feature_importance_df.sort_values(
+    by='Importance', ascending=False)
+
+# Plot feature importance
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Importance', y='Feature', data=feature_importance_df)
+plt.title('Feature Importance')
+plt.show()
