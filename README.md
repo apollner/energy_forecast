@@ -21,7 +21,6 @@ The box plot above shows the distribution of the ND values by month.
 The project includes the following files:
 
 - `project_script.py`: A Python script that preprocesses the data, creates time-based features, trains the model, and evaluates its performance.
-- `xgboost_model.pkl`: The trained XGBoost model.
 - `README.md`: A README file that explains the project and its components.
 
 ![Feature Importance](images/feature_importance.png)
