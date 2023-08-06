@@ -14,7 +14,7 @@ Time-based features such as hours of the day or months of the year are inherentl
 
 To preserve the cyclic nature of these features, we use trigonometric transformations, specifically sine and cosine functions. The idea is to project each hour or month value onto a circle such that the cyclic pattern is captured. For instance, for the `hour` feature:
 
-- `hour_sin` = \(\sin\left(\frac{2\pi \times \text{hour}}{24}\right)\)
+- `hour_sin` = $\(\sin\left(\frac{2\pi \times \text{hour}}{24}\right)\)$
 - `hour_cos` = \(\cos\left(\frac{2\pi \times \text{hour}}{24}\right)\)
 
 Similarly, for the `month` feature:
