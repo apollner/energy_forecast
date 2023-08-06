@@ -6,7 +6,7 @@ The data used in this project consists of hourly energy demand data for the year
 
 - `SETTLEMENT_DATE`: The date and time of the data point. All times are UK time and for the half hour beginning.
 - `SETTLEMENT_PERIOD`: A number representing the half-hour period of the day. For example, 1 represents the period from 00:00 to 00:30, 2 represents the period from 00:30 to 01:00, and so on.
-- `ND`: The non-delivery amount of energy in MWh. All values are an average over the half hour.
+- `ND`: National Demand. All values are an average over the half hour.
 
 The model was trained to predict the `ND` value based on the time-based features derived from `SETTLEMENT_DATE`.
 
